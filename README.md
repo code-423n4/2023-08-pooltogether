@@ -46,7 +46,7 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 
 ---
 
-# PoolTogether audit details
+# PoolTogether V5: Part Deux audit details
 - Total Prize Pool: $42,000 USDC 
   - HM awards: 29,287.50 USDC 
   - Analysis awards: $1,775 USDC USDC 
