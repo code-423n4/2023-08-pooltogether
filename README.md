@@ -57,7 +57,7 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
   - Lookout awards: $2,400 USDC 
   - Scout awards: $500 USDC 
 - Join [C4 Discord](https://discord.gg/code4rena) to register
-- Submit findings [using the C4 form](https://code4rena.com/contests/2023-07-pooltogether/submit)
+- Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-pooltogether-v5-part-deux/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
 - Starts July 31, 2023 20:00 UTC 
 - Ends August 04, 2023 20:00 UTC 
