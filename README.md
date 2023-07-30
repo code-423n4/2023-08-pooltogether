@@ -1,51 +1,3 @@
-# ✨ So you want to run an audit
-
-This `README.md` contains a set of checklists for our audit collaboration.
-
-Your audit will use two repos: 
-- **an _audit_ repo** (this one), which is used for scoping your audit and for providing information to wardens
-- **a _findings_ repo**, where issues are submitted (shared with you after the audit) 
-
-Ultimately, when we launch the audit, this repo will be made public and will contain the smart contracts to be reviewed and all the information needed for audit participants. The findings repo will be made public after the audit report is published and your team has mitigated the identified issues.
-
-Some of the checklists in this doc are for **C4 (🐺)** and some of them are for **you as the audit sponsor (⭐️)**.
-
----
-# Repo setup
-
-## ⭐️ Sponsor: Add code to this repo
-
-- [ ] Create a PR to this repo with the below changes:
-- [ ] Provide a self-contained repository with working commands that will build (at least) all in-scope contracts, and commands that will run tests producing gas reports for the relevant contracts.
-- [ ] Make sure your code is thoroughly commented using the [NatSpec format](https://docs.soliditylang.org/en/v0.5.10/natspec-format.html#natspec-format).
-- [ ] Please have final versions of contracts and documentation added/updated in this repo **no less than 48 business hours prior to audit start time.**
-- [ ] Be prepared for a 🚨code freeze🚨 for the duration of the audit — important because it establishes a level playing field. We want to ensure everyone's looking at the same code, no matter when they look during the audit. (Note: this includes your own repo, since a PR can leak alpha to our wardens!)
-
-
----
-
-## ⭐️ Sponsor: Edit this README
-
-Under "SPONSORS ADD INFO HERE" heading below, include the following:
-
-- [ ] Modify the bottom of this `README.md` file to describe how your code is supposed to work with links to any relevent documentation and any other criteria/details that the C4 Wardens should keep in mind when reviewing. ([Here's a well-constructed example.](https://github.com/code-423n4/2022-08-foundation#readme))
-  - [ ] When linking, please **provide all links as full absolute links** versus relative links
-  - [ ] All information should be provided in markdown format (HTML does not render on Code4rena.com)
-- [ ] Under the "Scope" heading, provide the name of each contract and:
-  - [ ] source lines of code (excluding blank lines and comments) in each
-  - [ ] external contracts called in each
-  - [ ] libraries used in each
-- [ ] Describe any novel or unique curve logic or mathematical models implemented in the contracts
-- [ ] Does the token conform to the ERC-20 standard? In what specific ways does it differ?
-- [ ] Describe anything else that adds any special logic that makes your approach unique
-- [ ] Identify any areas of specific concern in reviewing the code
-- [ ] Review the Gas award pool amount. This can be adjusted up or down, based on your preference - just flag it for Code4rena staff so we can update the pool totals across all comms channels. 
-- [ ] Optional / nice to have: pre-record a high-level overview of your protocol (not just specific smart contract functions). This saves wardens a lot of time wading through documentation.
-- [ ] See also: [this checklist in Notion](https://code4rena.notion.site/Key-info-for-Code4rena-sponsors-f60764c4c4574bbf8e7a6dbd72cc49b4#0cafa01e6201462e9f78677a39e09746)
-- [ ] Delete this checklist and all text above the line below when you're ready.
-
----
-
 # PoolTogether V5: Part Deux audit details
 - Total Prize Pool: $42,000 USDC 
   - HM awards: 29,287.50 USDC 
@@ -59,8 +11,8 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-pooltogether-v5-part-deux/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts July 31, 2023 20:00 UTC 
-- Ends August 04, 2023 20:00 UTC 
+- Starts August 02, 2023 20:00 UTC 
+- Ends August 07, 2023 20:00 UTC 
 
 ## Automated Findings / Publicly Known Issues
 
@@ -68,40 +20,83 @@ Automated findings output for the audit can be found [here](add link to report) 
 
 *Note for C4 wardens: Anything included in the automated findings output is considered a publicly known issue and is ineligible for awards.*
 
-[ ⭐️ SPONSORS ADD INFO HERE ]
-
 # Overview
 
-*Please provide some context about the code being audited, and identify any areas of specific concern in reviewing the code. (This is a good place to link to your docs, if you have them.)*
+This contest scope completes the PoolTogether V5 audit. The majority of the protocol was audited [by C4 on July 7](https://github.com/code-423n4/2023-07-pooltogether).
+
+This scopes includes several critical pieces:
+
+- Liquidation Pair. This is the contract that liquidates yield for prize tokens.
+- Draw Auction. [docs](https://dev.pooltogether.com/protocol/next/design/draw-auction) This suite of contracts auctions off RNG requests and then auctions off the bridge transaction to L2.
+- Remote Owner. A contract that builds on [ERC-5164](https://github.com/code-423n4/2022-12-pooltogether) and allows a contract on one chain to contral a contract on another.
+- Vault Boost. A contract that allows anyone to liquidate any token and contribute to the prize pool on a vault's behalf.
 
 # Scope
 
-*List all files in scope in the table below (along with hyperlinks) -- and feel free to add notes here to emphasize areas of focus.*
-
-*For line of code counts, we recommend using [cloc](https://github.com/AlDanial/cloc).* 
-
 | Contract | SLOC | Purpose | Libraries used |  
 | ----------- | ----------- | ----------- | ----------- |
-| [contracts/folder/sample.sol](contracts/folder/sample.sol) | 123 | This contract does XYZ | [`@openzeppelin/*`](https://openzeppelin.com/contracts/) |
-
-## Out of scope
-
-*List any files/contracts that are out of scope for this audit.*
+| [pt-v5-cgda-liquidator/src/LiquidationPair.sol](pt-v5-cgda-liquidator/src/LiquidationPair.sol) | 233 | This contract facilitates Periodic Continuous Gradual Dutch Auctions | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol](pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol) | 63 | This contract creates new LiquidationPairs | |
+| [pt-v5-cgda-liquidator/src/LiquidationRouter.sol](pt-v5-cgda-liquidator/src/LiquidationRouter.sol) | 47 | This contract is the user-facing interface for LiquidationPairs | ['openzeppelin'](https://github.com/openzeppelin/openzeppelin-contracts) |
+| [pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol](pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol) | 57 | This library implements the CGDA formulas | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [pt-v5-draw-auction/src/RngAuction.sol](pt-v5-draw-auction/src/RngAuction.sol) | 197 | This contract auctions off an RNG request |[`prb-math`](https://github.com/PaulRBerg/prb-math), ['openzeppelin'](https://github.com/openzeppelin/openzeppelin-contracts), [`owner-manager-contracts`](https://github.com/pooltogether/owner-manager-contracts), [`pt-v5-rng-contracts`](https://github.com/GenerationSoftware/pt-v5-rng-contracts) |
+| [pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol](pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol) | 24 | This contract relays RNG request auction results to a listener ||
+| [pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol](pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol) | 38 | This contract relays RNG request auction results over an ERC-5164 bridge to a listener | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [pt-v5-draw-auction/src/RngRelayAuction.sol](pt-v5-draw-auction/src/RngRelayAuction.sol) | 136 | This contract auctions off the RNG result relay | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [pt-v5-draw-auction/src/libraries/RewardLib.sol](pt-v5-draw-auction/src/libraries/RewardLib.sol) | 52 | Implements Parabolic Fractional Dutch Auction math | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol](pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol) | 11 | Listener interface for the RNG auction relay | |
+| [pt-v5-draw-auction/src/interfaces/IAuction.sol](pt-v5-draw-auction/src/interfaces/IAuction.sol) | 12 | Common Auction functions | |
+| [pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol](pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol) | 22 | Base class for relayers | |
+| [pt-v5-draw-auction/src/abstract/AddressRemapper.sol](pt-v5-draw-auction/src/abstract/AddressRemapper.sol) | 19 | Allows addresses to remap themselves for relayers | |
+| [pt-v5-vault-boost/src/VaultBoost.sol](pt-v5-vault-boost/src/VaultBoost.sol) | 56 | Allows anyone to liquidate tokens to boost the chances of a Vault winning | |
+| [pt-v5-vault-boost/src/VaultBoostFactory.sol](pt-v5-vault-boost/src/VaultBoostFactory.sol) | 11 | Creates new Vault Boost contracts | |
+| [remote-owner/src/RemoteOwner.sol](remote-owner/src/RemoteOwner.sol) | 11 | Allows a contract on one chain to control a contract on another using ERC-5164 | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [remote-owner/src/libraries/RemoteOwnerCallEncoder.sol](remote-owner/src/libraries/RemoteOwnerCallEncoder.sol) | 12 | Helps encode calls to a Remote Owner contract | |
 
 # Additional Context
 
-*Describe any novel or unique curve logic or mathematical models implemented in the contracts*
+## Mathematical Models
 
-*Sponsor, please confirm/edit the information below.*
+**Continuous Gradual Dutch Auction**
+
+The LiquidationPair prices yield liquidations using a periodic [Continuous Gradual Dutch Auction](https://www.paradigm.xyz/2022/04/gda). It's periodic in the sense that the auction runs in periods that will be aligned with the prize pool periods. At the beginning of each period, the CGDA adjusts the emissions rate and target price so that it adapts to changing market conditions.
+
+**Parabolic Fractional Dutch Auction**
+
+For the RNG auction we employ a novel auction we call a [Parabolic Fractional Dutch Auction](https://dev.pooltogether.com/protocol/next/design/draw-auction#parabolic-fractional-dutch-auction-pfda). This allows us to have an auction on L1 and have the price as a fraction of an L2 Prize Pool's reserve.
+
+## Deployment Configuration
+
+**LiquidationPair**
+
+There will be a LiquidationPair for each Vault. The pair's period length and offset will match the prize pool draw length and offset. This is to try to ensure there is an auction every draw. The target first sale time will be halfway through the auction, as that configuration works at a variety of TVLs in our simulations.
+
+The minimum auction amount will be configured to ensure a minimum efficiency of the liquidation pair.  If liquidation gas costs are $0.10 and we want a minimum liquidation efficiency of 95%, then the minimum auction amount should be $2.00 worth of tokens.
+
+The maximum decay constant is approximately 0.00015.
+
+**RNGAuction**
+
+The RNG auction's sequence period and offset will be daily and match all prize pools on L2. The auction duration will be less than the sequence period, to ensure that the VRGDA Claimer has sufficient time to claim prizes.
+
+## Unique Concerns
+
+In addition to concerns around the security of funds, we also have a number of domain-specific concerns:
+
+**Liquidation Pair getting bricked or hacked**. Our goal is for each Liquidation Pair to run indefinitely. The pair supports price volatility in several orders of magnitude around the last sale price, but is it possible for the pair to break permanently? Can it be bricked deliberately or accidentally?
+
+**Draw Auction performing badly**. The RNG Auction and RNG Relay Auctions are a novel mechanism that auction using a fraction of the Prize Pool reserve, rather than a specific price. Is there a significant risk of draining the reserve? Can the auction deviate from expectations and become bricked or unusable?
+
+**Losing control of the Remote Owner**. The Remote Owner is a unique contract in that it will allow us to extend our control from one chain to another. Can someone usurp us and take control of our Remote?
 
 ## Scoping Details 
 ```
 - If you have a public code repo, please share it here:  https://github.com/GenerationSoftware/pt-v5-draw-auction and https://github.com/GenerationSoftware/pt-v5-cgda-liquidator
-- How many contracts are in scope?:  12 
-- Total SLoC for these contracts?:  900
+- How many contracts are in scope?:  17 
+- Total SLoC for these contracts?:  1001
 - How many external imports are there?: 6 
-- How many separate interfaces and struct definitions are there for the contracts within scope?:  4
-- Does most of your code generally use composition or inheritance?:  Composition 
+- How many separate interfaces and struct definitions are there for the contracts within scope?:  5
+- Does most of your code generally use composition or inheritance?:  Composition
 - How many external calls?:   7
 - What is the overall line coverage percentage provided by your tests?: 100%
 - Is this an upgrade of an existing system?: False
@@ -112,11 +107,17 @@ Automated findings output for the audit can be found [here](add link to report) 
 - Describe any novel or unique curve logic or mathematical models your code uses: There are two variations of dutch auctions. One is a continuous gradual dutch auction, and the other is a fractional dutch auction
 - Is this either a fork of or an alternate implementation of another project?:   False
 - Does it use a side-chain?: False
-- Describe any specific areas you would like addressed: We want to make sure that the auctions can't be manipulated; that the auction fees are competitive or priced correctly.
+- Describe any specific areas you would like addressed: We want to make sure that the auctions can't be manipulated or bricked, and that the auction fees are competitive or priced correctly.
 ```
+
+# Setup
+
+Clone using the `--recurse` option or update the repository with `git submodule update --init --recursive`
 
 # Tests
 
-*Provide every step required to build the project from a fresh git clone, as well as steps to run the tests with a gas report.* 
+Within each git submodule, you can run `forge test` to run all tests. You can run `forge coverage` to see the coverage report.
 
-*Note: Many wardens run Slither as a first pass for testing.  Please document any known errors with no workaround.* 
+One-Liner for tests: `cd claimer && forge test && cd .. && cd prize-pool && forge test && cd .. && cd twab-controller && forge test && cd .. && cd vault && forge test && cd ..`
+
+Note: the Prize Pool must be compiled with `--optimize --via-ir` in order to fit within contract size limits.
