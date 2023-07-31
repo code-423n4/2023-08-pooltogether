@@ -31,29 +31,32 @@ This scopes includes several critical pieces:
 - Remote Owner. A contract that builds on [ERC-5164](https://github.com/code-423n4/2022-12-pooltogether) and allows a contract on one chain to contral a contract on another.
 - Vault Boost. A contract that allows anyone to liquidate any token and contribute to the prize pool on a vault's behalf.
 
+Links:
+
+- [PoolTogether V5 Documentation](https://dev.pooltogether.com/protocol/next/introduction)
+- [Loom Video describing high-level architecture](https://www.loom.com/share/a884d5c3ac4e408f8541af151989c5c9?sid=6c36560f-5323-46c7-9af0-83b3057951a6)
+
 # Scope
 
 | Contract | SLOC | Purpose | Libraries used |  
 | ----------- | ----------- | ----------- | ----------- |
 | [./pt-v5-cgda-liquidator/src/LiquidationPair.sol](./pt-v5-cgda-liquidator/src/LiquidationPair.sol) | 233 | This contract facilitates Periodic Continuous Gradual Dutch Auctions for yield | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
 | [./pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol](./pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol) | 63 | This contract creates new LiquidationPairs | |
-| [./pt-v5-cgda-liquidator/src/LiquidationRouter.sol](pt-v5-cgda-liquidator/src/LiquidationRouter.sol) | 47 | This contract is the user-facing interface for LiquidationPairs | [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts) |
-| [./pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol](pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol) | 57 | This library implements the CGDA formulas | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
-
-| [./pt-v5-draw-auction/src/RngAuction.sol](pt-v5-draw-auction/src/RngAuction.sol) | 197 | This contract auctions off an RNG request |[`prb-math`](https://github.com/PaulRBerg/prb-math), [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts), [`owner-manager-contracts`](https://github.com/pooltogether/owner-manager-contracts), [`pt-v5-rng-contracts`](https://github.com/GenerationSoftware/pt-v5-rng-contracts) |
-| [./pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol](pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol) | 24 | This contract relays RNG request auction results to a listener ||
-| [./pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol](pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol) | 38 | This contract relays RNG request auction results over an ERC-5164 bridge to a listener | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
-| [./pt-v5-draw-auction/src/RngRelayAuction.sol](pt-v5-draw-auction/src/RngRelayAuction.sol) | 136 | This contract auctions off the RNG result relay | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
-| [./pt-v5-draw-auction/src/libraries/RewardLib.sol](pt-v5-draw-auction/src/libraries/RewardLib.sol) | 52 | Implements Parabolic Fractional Dutch Auction math | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
-| [./pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol](pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol) | 11 | Listener interface for the RNG auction relay | |
-| [./pt-v5-draw-auction/src/interfaces/IAuction.sol](pt-v5-draw-auction/src/interfaces/IAuction.sol) | 12 | Common Auction functions | |
-| [./pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol](pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol) | 22 | Base class for relayers | |
-| [./pt-v5-draw-auction/src/abstract/AddressRemapper.sol](pt-v5-draw-auction/src/abstract/AddressRemapper.sol) | 19 | Allows addresses to remap themselves for relayers | |
-
-| [./pt-v5-vault-boost/src/VaultBoost.sol](pt-v5-vault-boost/src/VaultBoost.sol) | 56 | Allows anyone to liquidate tokens to boost the chances of a Vault winning | |
-| [./pt-v5-vault-boost/src/VaultBoostFactory.sol](pt-v5-vault-boost/src/VaultBoostFactory.sol) | 11 | Creates new Vault Boost contracts | |
-| [./remote-owner/src/RemoteOwner.sol](remote-owner/src/RemoteOwner.sol) | 11 | Allows a contract on one chain to control a contract on another using ERC-5164 | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
-| [./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol](remote-owner/src/libraries/RemoteOwnerCallEncoder.sol) | 12 | Helps encode calls to a Remote Owner contract | |
+| [./pt-v5-cgda-liquidator/src/LiquidationRouter.sol](./pt-v5-cgda-liquidator/src/LiquidationRouter.sol) | 47 | This contract is the user-facing interface for LiquidationPairs | [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts) |
+| [./pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol](./pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol) | 57 | This library implements the CGDA formulas | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [./pt-v5-draw-auction/src/RngAuction.sol](./pt-v5-draw-auction/src/RngAuction.sol) | 197 | This contract auctions off an RNG request |[`prb-math`](https://github.com/PaulRBerg/prb-math), [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts), [`owner-manager-contracts`](https://github.com/pooltogether/owner-manager-contracts), [`pt-v5-rng-contracts`](https://github.com/GenerationSoftware/pt-v5-rng-contracts) |
+| [./pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol](./pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol) | 24 | This contract relays RNG request auction results to a listener ||
+| [./pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol](./pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol) | 38 | This contract relays RNG request auction results over an ERC-5164 bridge to a listener | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [./pt-v5-draw-auction/src/RngRelayAuction.sol](./pt-v5-draw-auction/src/RngRelayAuction.sol) | 136 | This contract auctions off the RNG result relay | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [./pt-v5-draw-auction/src/libraries/RewardLib.sol](./pt-v5-draw-auction/src/libraries/RewardLib.sol) | 52 | Implements Parabolic Fractional Dutch Auction math | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [./pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol](./pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol) | 11 | Listener interface for the RNG auction relay | |
+| [./pt-v5-draw-auction/src/interfaces/IAuction.sol](./pt-v5-draw-auction/src/interfaces/IAuction.sol) | 12 | Common Auction functions | |
+| [./pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol](./pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol) | 22 | Base class for relayers | |
+| [./pt-v5-draw-auction/src/abstract/AddressRemapper.sol](./pt-v5-draw-auction/src/abstract/AddressRemapper.sol) | 19 | Allows addresses to remap themselves for relayers | |
+| [./pt-v5-vault-boost/src/VaultBoost.sol](./pt-v5-vault-boost/src/VaultBoost.sol) | 56 | Allows anyone to liquidate tokens to boost the chances of a Vault winning | |
+| [./pt-v5-vault-boost/src/VaultBoostFactory.sol](./pt-v5-vault-boost/src/VaultBoostFactory.sol) | 11 | Creates new Vault Boost contracts | |
+| [./remote-owner/src/RemoteOwner.sol](./remote-owner/src/RemoteOwner.sol) | 11 | Allows a contract on one chain to control a contract on another using ERC-5164 | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol](./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol) | 12 | Helps encode calls to a Remote Owner contract | |
 
 # Additional Context
 
@@ -69,7 +72,7 @@ For the RNG auction we employ a novel auction we call a [Parabolic Fractional Du
 
 ## Deployment Configuration
 
-**LiquidationPair**
+**Liquidation Pairs**
 
 There will be a LiquidationPair for each Vault. The pair's period length and offset will match the prize pool draw length and offset. This is to try to ensure there is an auction every draw. The target first sale time will be halfway through the auction, as that configuration works at a variety of TVLs in our simulations.
 
@@ -77,7 +80,7 @@ The minimum auction amount will be configured to ensure a minimum efficiency of 
 
 The maximum decay constant is approximately 0.00015.
 
-**RNGAuction**
+**Draw Auction**
 
 The RNG auction's sequence period and offset will be daily and match all prize pools on L2. The auction duration will be less than the sequence period, to ensure that the VRGDA Claimer has sufficient time to claim prizes.
 
