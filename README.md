@@ -34,7 +34,7 @@ This scopes includes several critical pieces:
 Links:
 
 - [PoolTogether V5 Documentation](https://dev.pooltogether.com/protocol/next/introduction)
-- [Loom Video describing high-level architecture](https://www.loom.com/share/a884d5c3ac4e408f8541af151989c5c9?sid=6c36560f-5323-46c7-9af0-83b3057951a6)
+- [Loom Video describing high-level architecture](https://www.loom.com/share/a884d5c3ac4e408f8541af151989c5c9?sid=6c36560f-5323-46c7-9af0-83b3057951a6) (note that this was made for Part I, and the items that were out of scope are now in-scope, and vice-versa!)
 
 # Scope
 
@@ -57,6 +57,10 @@ Links:
 | [./pt-v5-vault-boost/src/VaultBoostFactory.sol](./pt-v5-vault-boost/src/VaultBoostFactory.sol) | 11 | Creates new Vault Boost contracts | |
 | [./remote-owner/src/RemoteOwner.sol](./remote-owner/src/RemoteOwner.sol) | 11 | Allows a contract on one chain to control a contract on another using ERC-5164 | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
 | [./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol](./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol) | 12 | Helps encode calls to a Remote Owner contract | |
+
+## Out-of-Scope
+
+Note that the rest of the V5 codebase is out-of-scope, as it was audited in the first Code Arena audit [on July 7](https://github.com/code-423n4/2023-07-pooltogether).
 
 # Additional Context
 
