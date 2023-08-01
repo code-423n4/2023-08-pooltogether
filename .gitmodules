@@ -1,12 +1,12 @@
 [submodule "pt-v5-cgda-liquidator"]
 	path = pt-v5-cgda-liquidator
-	url = git@github.com:GenerationSoftware/pt-v5-cgda-liquidator.git
+	url = https://github.com/GenerationSoftware/pt-v5-cgda-liquidator
 [submodule "pt-v5-draw-auction"]
 	path = pt-v5-draw-auction
-	url = git@github.com:GenerationSoftware/pt-v5-draw-auction.git
-[submodule "pt-v5-vault-boost"]
-	path = pt-v5-vault-boost
-	url = git@github.com:GenerationSoftware/pt-v5-vault-boost.git
+	url = https://github.com/GenerationSoftware/pt-v5-draw-auction
 [submodule "remote-owner"]
 	path = remote-owner
-	url = git@github.com:GenerationSoftware/remote-owner.git
+	url = https://github.com/GenerationSoftware/remote-owner
+[submodule "pt-v5-vault-boost"]
+	path = pt-v5-vault-boost
+	url = https://github.com/GenerationSoftware/pt-v5-vault-boost

@@ -1,18 +1,19 @@
 # PoolTogether V5: Part Deux audit details
-- Total Prize Pool: $42,000 USDC 
-  - HM awards: 29,287.50 USDC 
-  - Analysis awards: $1,775 USDC USDC 
-  - QA awards: $887.50 USDC 
-  - Bot Race awards: $2,662.50 USDC 
-  - Gas awards: $887.50 USDC 
-  - Judge awards: $3,600 USDC 
-  - Lookout awards: $2,400 USDC 
-  - Scout awards: $500 USDC 
+
+- Total Prize Pool: $42,000 USDC
+  - HM awards: 29,287.50 USDC
+  - Analysis awards: $1,775 USDC USDC
+  - QA awards: $887.50 USDC
+  - Bot Race awards: $2,662.50 USDC
+  - Gas awards: $887.50 USDC
+  - Judge awards: $3,600 USDC
+  - Lookout awards: $2,400 USDC
+  - Scout awards: $500 USDC
 - Join [C4 Discord](https://discord.gg/code4rena) to register
 - Submit findings [using the C4 form](https://code4rena.com/contests/2023-08-pooltogether-v5-part-deux/submit)
 - [Read our guidelines for more details](https://docs.code4rena.com/roles/wardens)
-- Starts August 02, 2023 20:00 UTC 
-- Ends August 07, 2023 20:00 UTC 
+- Starts August 02, 2023 20:00 UTC
+- Ends August 07, 2023 20:00 UTC
 
 ## Automated Findings / Publicly Known Issues
 
@@ -40,23 +41,23 @@ Links:
 
 | Contract | SLOC | Purpose | Libraries used |  
 | ----------- | ----------- | ----------- | ----------- |
-| [./pt-v5-cgda-liquidator/src/LiquidationPair.sol](./pt-v5-cgda-liquidator/src/LiquidationPair.sol) | 233 | This contract facilitates Periodic Continuous Gradual Dutch Auctions for yield | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
-| [./pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol](./pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol) | 63 | This contract creates new LiquidationPairs | |
-| [./pt-v5-cgda-liquidator/src/LiquidationRouter.sol](./pt-v5-cgda-liquidator/src/LiquidationRouter.sol) | 47 | This contract is the user-facing interface for LiquidationPairs | [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts) |
-| [./pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol](./pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol) | 57 | This library implements the CGDA formulas | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
-| [./pt-v5-draw-auction/src/RngAuction.sol](./pt-v5-draw-auction/src/RngAuction.sol) | 197 | This contract auctions off an RNG request |[`prb-math`](https://github.com/PaulRBerg/prb-math), [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts), [`owner-manager-contracts`](https://github.com/pooltogether/owner-manager-contracts), [`pt-v5-rng-contracts`](https://github.com/GenerationSoftware/pt-v5-rng-contracts) |
-| [./pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol](./pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol) | 24 | This contract relays RNG request auction results to a listener ||
-| [./pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol](./pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol) | 38 | This contract relays RNG request auction results over an ERC-5164 bridge to a listener | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
-| [./pt-v5-draw-auction/src/RngRelayAuction.sol](./pt-v5-draw-auction/src/RngRelayAuction.sol) | 136 | This contract auctions off the RNG result relay | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
-| [./pt-v5-draw-auction/src/libraries/RewardLib.sol](./pt-v5-draw-auction/src/libraries/RewardLib.sol) | 52 | Implements Parabolic Fractional Dutch Auction math | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
-| [./pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol](./pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol) | 11 | Listener interface for the RNG auction relay | |
-| [./pt-v5-draw-auction/src/interfaces/IAuction.sol](./pt-v5-draw-auction/src/interfaces/IAuction.sol) | 12 | Common Auction functions | |
-| [./pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol](./pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol) | 22 | Base class for relayers | |
-| [./pt-v5-draw-auction/src/abstract/AddressRemapper.sol](./pt-v5-draw-auction/src/abstract/AddressRemapper.sol) | 19 | Allows addresses to remap themselves for relayers | |
-| [./pt-v5-vault-boost/src/VaultBoost.sol](./pt-v5-vault-boost/src/VaultBoost.sol) | 56 | Allows anyone to liquidate tokens to boost the chances of a Vault winning | |
-| [./pt-v5-vault-boost/src/VaultBoostFactory.sol](./pt-v5-vault-boost/src/VaultBoostFactory.sol) | 11 | Creates new Vault Boost contracts | |
-| [./remote-owner/src/RemoteOwner.sol](./remote-owner/src/RemoteOwner.sol) | 11 | Allows a contract on one chain to control a contract on another using ERC-5164 | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
-| [./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol](./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol) | 12 | Helps encode calls to a Remote Owner contract | |
+| [./pt-v5-cgda-liquidator/src/LiquidationPair.sol](https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationPair.sol) | 233 | This contract facilitates Periodic Continuous Gradual Dutch Auctions for yield | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [./pt-v5-cgda-liquidator/src/LiquidationPairFactory.sol](https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationPairFactory.sol) | 63 | This contract creates new LiquidationPairs | |
+| [./pt-v5-cgda-liquidator/src/LiquidationRouter.sol](https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationRouter.sol) | 47 | This contract is the user-facing interface for LiquidationPairs | [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts) |
+| [./pt-v5-cgda-liquidator/src/libraries/ContinuousGDA.sol](https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/libraries/ContinuousGDA.sol) | 57 | This library implements the CGDA formulas | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [./pt-v5-draw-auction/src/RngAuction.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/RngAuction.sol) | 197 | This contract auctions off an RNG request |[`prb-math`](https://github.com/PaulRBerg/prb-math), [`openzeppelin`](https://github.com/openzeppelin/openzeppelin-contracts), [`owner-manager-contracts`](https://github.com/pooltogether/owner-manager-contracts), [`pt-v5-rng-contracts`](https://github.com/GenerationSoftware/pt-v5-rng-contracts) |
+| [./pt-v5-draw-auction/src/RngAuctionRelayerDirect.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/RngAuctionRelayerDirect.sol) | 24 | This contract relays RNG request auction results to a listener ||
+| [./pt-v5-draw-auction/src/RngAuctionRelayerRemoteOwner.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/RngAuctionRelayerRemoteOwner.sol) | 38 | This contract relays RNG request auction results over an ERC-5164 bridge to a listener | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [./pt-v5-draw-auction/src/RngRelayAuction.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/RngRelayAuction.sol) | 136 | This contract auctions off the RNG result relay | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [./pt-v5-draw-auction/src/libraries/RewardLib.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/libraries/RewardLib.sol) | 52 | Implements Parabolic Fractional Dutch Auction math | [`prb-math`](https://github.com/PaulRBerg/prb-math) |
+| [./pt-v5-draw-auction/src/interfaces/IRngAuctionRelayListener.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/interfaces/IRngAuctionRelayListener.sol) | 11 | Listener interface for the RNG auction relay | |
+| [./pt-v5-draw-auction/src/interfaces/IAuction.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/interfaces/IAuction.sol) | 12 | Common Auction functions | |
+| [./pt-v5-draw-auction/src/abstract/RngAuctionRelayer.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/abstract/RngAuctionRelayer.sol) | 22 | Base class for relayers | |
+| [./pt-v5-draw-auction/src/abstract/AddressRemapper.sol](https://github.com/GenerationSoftware/pt-v5-draw-auction/blob/f1c6d14a1772d6609de1870f8713fb79977d51c1/src/abstract/AddressRemapper.sol) | 19 | Allows addresses to remap themselves for relayers | |
+| [./pt-v5-vault-boost/src/VaultBooster.sol](https://github.com/GenerationSoftware/pt-v5-vault-boost/blob/9d640051ab61a0fdbcc9500814b7f8242db9aec2/src/VaultBooster.sol) | 56 | Allows anyone to liquidate tokens to boost the chances of a Vault winning | |
+| [./pt-v5-vault-boost/src/VaultBoosterFactory.sol](https://github.com/GenerationSoftware/pt-v5-vault-boost/blob/9d640051ab61a0fdbcc9500814b7f8242db9aec2/src/VaultBoosterFactory.sol) | 11 | Creates new Vault Boost contracts | |
+| [./remote-owner/src/RemoteOwner.sol](https://github.com/GenerationSoftware/remote-owner/blob/285749ab51e98afc8ebb4e4049a4348d669a3e9d/src/RemoteOwner.sol) | 11 | Allows a contract on one chain to control a contract on another using ERC-5164 | [`ERC5164`](https://github.com/generationsoftware/ERC5164) |
+| [./remote-owner/src/libraries/RemoteOwnerCallEncoder.sol](https://github.com/GenerationSoftware/remote-owner/blob/285749ab51e98afc8ebb4e4049a4348d669a3e9d/src/libraries/RemoteOwnerCallEncoder.sol) | 12 | Helps encode calls to a Remote Owner contract | |
 
 ## Out-of-Scope
 
@@ -98,7 +99,8 @@ In addition to concerns around the security of funds, we also have a number of d
 
 **Losing control of the Remote Owner**. The Remote Owner is a unique contract in that it will allow us to extend our control from one chain to another. Can someone usurp us and take control of our Remote?
 
-## Scoping Details 
+## Scoping Details
+
 ```
 - If you have a public code repo, please share it here:  https://github.com/GenerationSoftware/pt-v5-draw-auction and https://github.com/GenerationSoftware/pt-v5-cgda-liquidator
 - How many contracts are in scope?:  17 
@@ -121,12 +123,18 @@ In addition to concerns around the security of funds, we also have a number of d
 
 # Setup
 
-Clone using the `--recurse` option or update the repository with `git submodule update --init --recursive`
+Clone using the `--recurse` option :
+
+```sh
+git clone https://github.com/code-423n4/2023-08-pooltogether.git --recurse
+```
+
+Or update the repository with:
+
+```sh
+git submodule update --init --recursive
+```
 
 # Tests
 
 Within each git submodule, you can run `forge test` to run all tests. You can run `forge coverage` to see the coverage report.
-
-One-Liner for tests: `cd claimer && forge test && cd .. && cd prize-pool && forge test && cd .. && cd twab-controller && forge test && cd .. && cd vault && forge test && cd ..`
-
-Note: the Prize Pool must be compiled with `--optimize --via-ir` in order to fit within contract size limits.
