@@ -81,7 +81,7 @@ For the RNG auction we employ a novel auction we call a [Parabolic Fractional Du
 
 There will be a LiquidationPair for each Vault. The pair's period length and offset will match the prize pool draw length and offset. This is to try to ensure there is an auction every draw. The target first sale time will be halfway through the auction, as that configuration works at a variety of TVLs in our simulations.
 
-The minimum auction amount will be configured to ensure a minimum efficiency of the liquidation pair.  If liquidation gas costs are <span><span>$</span></span>0.10 and we want a minimum liquidation efficiency of 95%, then the minimum auction amount should be <span><span>$</span></span>2.00 worth of tokens.
+The minimum auction amount will be configured to ensure a minimum efficiency of the liquidation pair.  If liquidation gas costs are &#36;0.10 and we want a minimum liquidation efficiency of 95%, then the minimum auction amount should be &#36;2.00 worth of tokens.
 
 The maximum decay constant is approximately 0.00015.
 
