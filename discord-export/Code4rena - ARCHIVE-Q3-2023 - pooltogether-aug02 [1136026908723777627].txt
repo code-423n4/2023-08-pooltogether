@@ -1,0 +1,759 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-Q3-2023 / pooltogether-aug02
+==============================================================
+
+[08/02/2023 19:08] asselstine
+Hey wolfpack!  Get ready for PoolTogether V5: Part Deux.  It's time to review the final components of the new V5 protocol!
+
+We're excited to see what you all find.  As always, feel free to tag either myself or @Pierrick in this channel, or dm us if you have questions.
+
+Happy hunting!
+
+{Reactions}
+🎉 (3) 👋 
+
+[08/02/2023 19:14] itsmetechjay (pinned)
+👋 Hello and welcome to the audit channel for the $42,000 USDC **PoolTogether V5: Part Deux** audit!
+
+📆 Audit opens Wednesday, 02 August 2023 20:00 (20:00 UTC) and runs through Monday, 07 August 2023 20:00(20:00 UTC) (5 days).
+
+Please give a warm welcome to the PoolTogether team, particularly @Brendan 🌊🏆 and @Pierrick, who will be available for questions either here in the channel or via DM in the GMT+1 timezone(s).
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/contests/2023-08-pooltogether-v5-part-deux#top
+
+{Reactions}
+🚀 (2) 
+
+[08/02/2023 19:14] itsmetechjay
+Pinned a message.
+
+
+[08/03/2023 03:38] pfapostol
+Does anyone have the same problem and know the solution?
+```
+fatal: Unable to checkout 'ff68495eb56c382b2ddcea4020259e106353b874' in submodule path 'pt-v5-draw-auction/lib/remote-owner/lib/ERC5164/lib/optimism/l2geth/tests/testdata'
+fatal: Failed to recurse into submodule path 'pt-v5-draw-auction/lib/remote-owner/lib/ERC5164/lib/optimism'
+fatal: Failed to recurse into submodule path 'pt-v5-draw-auction/lib/remote-owner/lib/ERC5164'
+fatal: Failed to recurse into submodule path 'pt-v5-draw-auction/lib/remote-owner'
+fatal: Failed to recurse into submodule path 'pt-v5-draw-auction'
+```
+
+
+[08/03/2023 06:36] 0x11singh99
+Try to run test cases, I also get this but test cases ran even afetr this So I ignored it
+
+
+[08/03/2023 06:37] pfapostol
+i fixed by cloning manually all submodules
+
+{Reactions}
+👍 (2) 
+
+[08/03/2023 10:25] _3agle
+@Brendan 🌊🏆 
+If I understand this correctly, 
+Vaults can be deployed in which users can deposit their ERC20 tokens. These tokens accrue yield (how?). Then the yield is liquidated (by who?). 
+This yield is sold for POOL tokens. The POOL tokens are added to the prize pool. And Vaults claim the prizes on behalf of depositors.
+
+
+[08/03/2023 10:56] _3agle
+Also can you provide more context on VaultBooster
+
+
+[08/03/2023 11:16] plamkata
+If I remember correctly from the last contest, they use an outside yield vault, they do not do the accruing. Correct me if I am wrong, I am not at home rn @Brendan 🌊🏆 @Pierrick
+
+
+[08/03/2023 14:01] asselstine
+Yes; our vaults wrap other 4626 vaults and turn the yield into prizes
+
+
+[08/03/2023 14:02] asselstine
+It allow us to subsidize a vault by liquidating any arbitrary token and contributing the POOL to the prize pool on a vaults behalf
+
+
+[08/03/2023 14:20] plamkata
+I remember well then 😜
+
+
+[08/03/2023 14:41] plamkata
+@Brendan 🌊🏆 @Pierrick any of yall currently open for dms?
+
+
+[08/03/2023 14:51] pierrickgt
+Yes, go ahead
+
+
+[08/03/2023 16:11] debofx
+Hi All, There are so many broken file path errors which are unusually high.  Am I missing something?
+
+{Reactions}
+👍 
+
+[08/03/2023 16:11] thebrittfactor (pinned)
+**Wardens** - please note that the automated findings output (AKA the winning bot race report 🏆, submitted by @ChaseTheLight) is posted below.
+
+These are considered publicly known issues and are not eligible for awards.
+
+🤖 **Automated findings:** 
+https://gist.github.com/code423n4/952d3825f1f11cd108c91f2f01a08c77
+
+📄 **Code4rena submission guidelines and automated findings policy:** 
+https://docs.code4rena.com/roles/wardens/submission-policy#automated-findings-ineligible
+
+The above link will also be added to the contest README shortly.
+
+
+[08/03/2023 16:28] itsmetechjay
+Pinned a message.
+
+
+[08/03/2023 16:29] plamkata
+Where can we find the RNG Interface?
+
+
+[08/03/2023 16:41] pierrickgt
+https://github.com/GenerationSoftware/pt-v5-rng-contracts/blob/main/contracts/RNGInterface.sol
+
+
+[08/03/2023 16:42] pierrickgt
+Do you have any examples?
+
+
+[08/03/2023 18:04] debofx
+Yes, one of many is: Prb-math solidity files do not match. For instance "prb-math/ud8..sol" is the import path. But when you clone the import path is actually "../../prb-math/src/ud8..sol"
+
+
+[08/03/2023 18:07] asselstine
+I just did a fresh clone of the audit repo, ran `git submodule update --init --recursive`, then ran `forge test` in each repo and everything worked
+
+
+[08/03/2023 18:07] asselstine
+@debo Could you link to the line you're referring to?
+
+
+[08/03/2023 18:30] debofx
+Ok, I did not run forge test. I will link in to the lines for them and then run a new git clone> forge test.
+
+{Reactions}
+👍 
+
+[08/03/2023 18:59] debofx
+> One example but same applies to thier subfolder: https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationPair.sol#L4-L6  `For these three lines I changed to "/2023-08-pooltogether/pt-v5-cgda-liquidator/lib/pt-v5-liquidator-interfaces/src/interfaces/ILiquidationSource.sol"     "/2023-08-pooltogether/pt-v5-cgda-liquidator/lib/pt-v5-liquidator-interfaces/src/interfaces/ILiquidationPair.sol"  "../../prb-math/src/SD59x18.sol"` I had to git clone the libraries linked in the code4rena page.
+
+{Embed}
+https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationPair.sol
+pt-v5-cgda-liquidator/src/LiquidationPair.sol at 7f95bcacd4a566c2be...
+Contribute to GenerationSoftware/pt-v5-cgda-liquidator development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - pooltogether-aug02 [1136026908723777627].txt_Files/pt-v5-cgda-liquidator-D0D2C
+
+
+[08/03/2023 19:49] debofx
+> One example but same applies to thier subfolder: https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationPair.sol#L4-L6  `For these three lines I changed to "/2023-08-pooltogether/pt-v5-cgda-liquidator/lib/pt-v5-liquidator-interfaces/src/interfaces/ILiquidationSource.sol"     "/2023-08-pooltogether/pt-v5-cgda-liquidator/lib/pt-v5-liquidator-interfaces/src/interfaces/ILiquidationPair.sol"  "../../prb-math/src/SD59x18.sol"` I had to git clone the libraries linked in the code4rena page. I have git cloned again and ran forge test on every repository and still have the same problem,  is there a way to clone without the subdirectories chaging?
+
+{Embed}
+https://github.com/GenerationSoftware/pt-v5-cgda-liquidator/blob/7f95bcacd4a566c2becb98d55c1886cadbaa8897/src/LiquidationPair.sol
+pt-v5-cgda-liquidator/src/LiquidationPair.sol at 7f95bcacd4a566c2be...
+Contribute to GenerationSoftware/pt-v5-cgda-liquidator development by creating an account on GitHub.
+Code4rena - ARCHIVE-Q3-2023 - pooltogether-aug02 [1136026908723777627].txt_Files/pt-v5-cgda-liquidator-D0D2C
+
+
+[08/03/2023 19:53] pierrickgt
+Have you ran `forge install`?
+I've cloned the repo, cd into it, ran `forge install` then `forge test` and it ran without any problem.
+
+
+[08/03/2023 19:54] pierrickgt
+Which forge version are you running?
+
+
+[08/03/2023 20:02] 0xarz
+hey, stupid question but whats the tokenIn and tokenOut in the LiquidationPair?
+
+
+[08/03/2023 20:08] pierrickgt
+`tokenIn` is the token being liquidated, in our case the POOL token, in exchange of `tokenOut` which corresponds to the Vault shares.
+In summary, yield is being liquidated in exchange of POOL tokens.
+
+
+[08/03/2023 20:12] plamkata
+Wait so it should be the other way around
+
+
+[08/03/2023 20:12] plamkata
+You are liquidating vault yield for pool
+
+
+[08/03/2023 20:12] plamkata
+So tokenIn is the vault shares, tokenOut is the Pool
+
+
+[08/03/2023 20:13] pierrickgt
+This diagram should help you understand how it works.
+The liquidator calls `swapExactAmountOut` on the LiquidationRouter, POOL tokens are sent to the PrizePool then `liquidate` is called on the Vault.
+POOL tokens are then contributed for the current draw and vault shares are minted to the liquidator.
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - pooltogether-aug02 [1136026908723777627].txt_Files/liquidation-flow-4E92C.png
+
+
+[08/03/2023 20:15] pierrickgt
+No, it's the other way around.
+It will revert if `tokenOut` is not the Vault address or if `tokenIn` is not the Prize Token, in our case POOL.
+https://github.com/GenerationSoftware/pt-v5-vault/blob/b2a3b23e4ae5a533bbe9e9b606899ccefc287fd2/src/Vault.sol#L550
+
+
+[08/03/2023 20:16] plamkata
+Got it
+
+
+[08/03/2023 20:23] 0xarz
+gotcha, thanks!
+
+
+[08/03/2023 20:30] debofx
+I think the problem is my VS Code.  I will try and use something else.
+
+
+[08/03/2023 20:30] debofx
+remappings are fine.
+
+{Reactions}
+👍 (2) 
+
+[08/03/2023 21:31] 0xarz
+and POOL is the yield the users get from depositing tokens into the vault?
+
+
+[08/03/2023 21:33] pierrickgt
+Yes, POOL is the token the user receives if he wins a prize
+
+
+[08/03/2023 21:36] 0xarz
+i get that but the user needs POOL to call swapExactAmountOut() right? where does he get POOL if he has never won before?
+
+
+[08/03/2023 21:39] pierrickgt
+Exactly. Liquidators are sophisticated actors that will arbitrage a price discrepancy between POOL and Vault shares.
+They can acquire POOL via Uniswap for example.
+
+
+[08/03/2023 21:40] 0xarz
+makes sense, thanks a lot!
+
+
+[08/04/2023 05:23] _3agle
+So a user sends POOL tokens to get Vault shares in return
+On the other hand, the users can also supply ERC20 tokens to the vault to receive Vault shares??
+
+
+[08/04/2023 05:56] _3agle
+In this image, does liquidator mean "liquidation pair"?
+
+
+[08/04/2023 07:33] _3agle
+@Brendan 🌊🏆  sent you FR
+
+{Reactions}
+🇫🇷 (3) 👍 🐔 
+
+[08/04/2023 12:10] _3agle
+I meant friend request not France 😂
+
+
+[08/04/2023 14:14] asselstine
+Lol either way it works
+
+{Reactions}
+😁 
+
+[08/04/2023 15:03] pierrickgt
+Yes exactly
+
+{Reactions}
+👍 
+
+[08/04/2023 15:05] _3agle
+@Pierrick 👆
+
+
+[08/04/2023 15:06] pierrickgt
+Yes exactly, when users deposit underlying assets into the Vault, they receive in exchange Vault shares representing their deposit
+
+
+[08/04/2023 15:07] _3agle
+also when they send pool tokens while liquidation, they recieve vault shares, right?
+
+
+[08/04/2023 15:09] pierrickgt
+Yes, you trade POOL tokens for Vault shares.
+
+{Reactions}
+👍 
+
+[08/04/2023 15:20] _3agle
+@Pierrick I know that auctions are conducted to get a random number, but what are the auctions in Liquidation Pair about?
+
+
+[08/04/2023 15:23] pierrickgt
+@Brendan 🌊🏆 should be able to answer this one.
+
+{Reactions}
+👍 
+
+[08/04/2023 15:25] asselstine
+Solved in dms!
+
+
+[08/04/2023 15:29] plamkata
+Drop a screenshot for publicity
+
+
+[08/04/2023 15:32] _3agle
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - pooltogether-aug02 [1136026908723777627].txt_Files/image-7ED15.png
+
+
+[08/04/2023 15:35] asselstine
+Thanks!
+
+
+[08/04/2023 15:35] asselstine
+I ran out of time to write docs, so perhaps that suffices 😄
+
+
+[08/04/2023 15:36] asselstine
+I'll see if I can find some time today to add Liquidation Pair docs to the dev.pooltogether.com
+
+
+[08/04/2023 15:36] asselstine
+WIll let you all know if I manage it
+
+{Reactions}
+👌 
+
+[08/04/2023 15:45] plamkata
+The RNGInterface is just the interface for the current randomness source, the Chainlink VRF on launch?
+
+
+[08/04/2023 15:45] plamkata
+It's not some seperate contract right
+
+
+[08/04/2023 15:57] asselstine
+It's an interface that we use to abstract the RNG service
+
+
+[08/04/2023 19:54] asselstine
+Hey folks!
+
+I’m going to be out of cell service tonight, Saturday, and part of Sunday.
+
+Please direct all questions to @Pierrick until I’m back!  Thank you
+
+
+[08/05/2023 15:33] 0xarz
+whats the difference between RngAuctionRelayerDirect and RngAuctionRelayerRemoteOwner?
+
+
+[08/05/2023 15:39] plamkata
+The usage of the remote owner helper contract
+
+{Reactions}
+👍 
+
+[08/05/2023 15:51] 0xarz
+in what cases is the direct one used, and in what cases is the remote one used tho?
+
+
+[08/05/2023 16:19] pierrickgt
+The direct one is used when you want to relay on the same chain.
+The remote one is used when you want to relay from L1 to an L2 chain.
+
+
+[08/05/2023 16:23] 0xarz
+i see, ty! is the direct one ever going to be used then?
+
+
+[08/05/2023 16:30] pierrickgt
+Yes for incentivizing the Draw on Ethereum.
+
+{Reactions}
+👍 
+
+[08/05/2023 17:12] 0xstalin
+is it expected the git clone to take so much time? It has been running for around 30 minutes 😅 
+I ran this command `git clone https://github.com/code-423n4/2023-08-pooltogether.git --recurse`
+
+
+[08/05/2023 17:25] pierrickgt
+Try without `--recurse` and run `forge install` in each subfolders.
+`pt-v5-cgda-liquidator` imports a lot of dependencies from ERC5164, that's mainly why it can be slow to clone.
+
+{Reactions}
+🫡 
+
+[08/05/2023 17:59] angry_mustache_man
+@Pierrick please add me to your friend list.  I am not able to sent you fr.
+
+
+[08/05/2023 18:31] pierrickgt
+I've sent you a friend request
+
+{Reactions}
+👍 
+
+[08/06/2023 11:40] _3agle
+@Pierrick need to DM you. can you add me too
+
+
+[08/06/2023 14:16] cholakovv
+me too if its possible @Pierrick
+
+
+[08/06/2023 21:28] netlify
+@Brendan 🌊🏆 Please add me as friend so I can DM you. I can't add you as friend. Neither can I DM you. Thanks
+
+
+[08/06/2023 21:40] 0xstalin
+@Pierrick @Brendan 🌊🏆 Quick question, what is the role of the VaultBoosters?
+
+
+[08/06/2023 22:38] asselstine
+Just opened!
+
+
+[08/06/2023 22:45] asselstine
+To liquidate any old token and contribute the POOL to the prize pool on behalf of a vault
+
+
+[08/06/2023 22:46] asselstine
+Basically to increase a vaults chance of winning
+
+
+[08/07/2023 08:23] teawaterwire
+i hope this is the last time a project requires us to download 1Go of code 😅
+
+{Reactions}
+😅 
+
+[08/07/2023 09:51] teawaterwire
+would it be possible to have a diagram to understand the VaultBoosters?
+
+
+[08/07/2023 12:39] angry_mustache_man
+Is any sponsor online??
+
+
+[08/07/2023 15:00] acegawd
+@Brendan 🌊🏆 @Pierrick who's available?
+
+
+[08/07/2023 15:05] pierrickgt
+I'm available
+
+
+[08/07/2023 15:06] hx0111.
+The protocol definitly can use more diagrams to illustrate the fund flow
+
+
+[08/07/2023 15:09] pierrickgt
+Any diagram you would like to see?
+
+
+[08/07/2023 15:16] asselstine
+Agreed.  We are going to separate the ERC5164 interfaces into a separate repo so there isn’t a dependency on Optimism.  We’re all suffering for it!
+
+
+[08/07/2023 15:23] acegawd
+Going to DM you @Brendan 🌊🏆
+
+{Reactions}
+👍 
+
+[08/07/2023 15:41] olanre_waju
+Please can anyone tell me what the RingAuction does in simple terms, i have gone through the documentation, just a simpler meaning. thanks. @Pierrick @Brendan 🌊🏆 @0xStalin
+
+
+[08/07/2023 15:42] asselstine
+The Rng Auction is a reverse dutch auction that incentivizes someone to trigger a random number generation request
+
+{Reactions}
+❤️ (2) 
+
+[08/07/2023 15:56] pierrickgt (pinned)
+For anyone having issues cloning the repository from the contest.
+If you clone the repo without `--recurse`, it will not initialize the sub git folders.
+So for each repo, you need to run `git submodule update --init --remote pt-v5-draw-auction` to pull the repo and then you can `cd` into it and run `forge install`.
+
+
+[08/07/2023 16:05] itsmetechjay
+Pinned a message.
+
+
+[08/07/2023 16:16] hx0111.
+All of it .. the execution flow from when a user deposite in a vault .. to the point he gets a reward. clearing the vault boost, RNG and the sequence
+
+
+[08/07/2023 16:20] pierrickgt
+There is this diagram in the docs for the deposit flow: https://dev.pooltogether.com/protocol/next/design/
+
+{Reactions}
+👍 
+
+[08/07/2023 16:21] pierrickgt
+For the DrawAuction: https://dev.pooltogether.com/protocol/next/design/draw-auction
+
+
+[08/07/2023 17:09] hx0111.
+I did read the documentation, yet can't grab the whole picture
+
+
+[08/07/2023 17:09] hx0111.
+Thanx @Pierrick
+
+
+[08/07/2023 17:24] pierrickgt
+What is missing for you to understand it better?
+
+
+[08/07/2023 17:59] hx0111.
+Not much time to understand😫
+
+
+[08/07/2023 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺wardens The **PoolTogether V5: Part Deux** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks. Keep an eye on #📢announcements for regular updates on how the audit is progressing through awarding 🤑🏆, judging 🧑‍⚖️ and reporting 📜. Feel free to ping a Contest-Admin if you have questions along the way!
+
+{Reactions}
+🔥 (6) 👍 (3) 
+
+[08/07/2023 20:45] asselstine
+@hereThanks everyone! Excited to see what you've all found.
+
+{Reactions}
+🫡 (6) 
+
+[08/07/2023 22:17] olanre_waju
+It was great working with you guys, great sponsors!!! Thanks for your patience and support @Brendan 🌊🏆 @Pierrick
+
+{Reactions}
+👍 (3) ➕ 
+
+[08/08/2023 04:19] _3agle
+Thank you @Brendan 🌊🏆 @Pierrick
+Best of Luck with V5 ✌️
+
+
+[08/08/2023 10:00] hex_sadeeq
+Hey @Priyam can I dm??
+
+{Reactions}
+👍 
+
+[08/08/2023 14:41] asselstine
+Thank you!
+
+
+[08/18/2023 15:46] thebrittfactor
+🤑 🎉  Awards for **PoolTogether V5: Part Deux**:
+
+$11,374.29 USDC » @dirk_y
+$3,014.92 USDC » @Priyam 
+$2,768.02 USDC » @nadin 
+$2,760.39 USDC » @0xmystery 
+$1,702.14 USDC » @MohammedRizwan 
+$1,416.10 USDC » @bin2chen
+$1,121.02 USDC » @0xStalin 
+$1,114.70 USDC » @Angry_Mustache_Man 
+$1,031.39 USDC » @hals 
+$793.38 USDC » @14si2o_Flint 
+$743.02 USDC » @Rolezn 
+$624.23 USDC » @0xbepresent 
+$565.66 USDC » @ptsanev 
+$556.10 USDC » @0xSmartContract 
+$476.03 USDC » @MatricksDeCoder
+$321.32 USDC » @Giorgio 
+$300.75 USDC » @SanketKogekar 
+$231.35 USDC » @cartlex_ 
+$148.20 USDC » @rvierdiiev 
+$129.80 USDC » @K42 Ψ 
+$129.80 USDC » @hunter_w3b 
+$116.52 USDC » @code-cipher 
+$115.67 USDC » @piyushshukla599 
+$99.19 USDC » @DedOhwale (GMT-7) 
+$99.19 USDC » @cholakov 
+$89.63 USDC » @T1MOH 
+$89.63 USDC » @Jorgect
+$89.63 USDC » @shirochan 
+$89.63 USDC » @seerether 
+$89.63 USDC » @D_Auditor 
+$89.63 USDC » @Arz 
+$89.63 USDC » @trachev 
+$89.63 USDC » @josephdara 
+$30.61 USDC » @Rageur 
+$30.61 USDC » @Shamsulhaq123 
+$30.61 USDC » @ReyAdmirado 
+$30.61 USDC » @0xhex 
+$30.61 USDC » @0xta 
+$30.61 USDC » @none 
+$30.61 USDC » @SAQ 
+$30.61 USDC » @dharma09 
+$30.61 USDC » @SY_S 
+$30.61 USDC » @petrichor🦖 
+$30.61 USDC » @JCK 
+$30.61 USDC » @Raihan
+
+🏁 Findings summary
+-------------------------------------
+High risk findings: 2 unique (16 total)
+Med risk findings: 11 unique (25 total)
+Gas reports: 15 total (Best Rolezn)
+QA reports: 6 total (Best 0xmystery)
+Advanced Analysis reports: 7 total (Best 3agle)
+
+Awards will be distributed on Polygon within the next week. Congratulations all!  💸 💸 💸
+
+*Note: If you participated in this audit and don’t see your name on this list, please wait until the report is published and the findings repo is made public to check on your submissions.*
+
+{Reactions}
+🚀 (7) ✅ (5) ❤️ (8) 🫡 (5) poolspinning (4) 
+
+[08/18/2023 15:49] plamkata
+That was so fast, props to the PoolTogether team on both audits, you guys were goated :chefskiss:
+
+
+[08/18/2023 15:56] auditsea
+Congrats everyone!
+
+
+[08/18/2023 15:56] auditsea
+Guess @dirk_y especially nails PoolTogether contests 😂
+
+
+[08/18/2023 15:59] _3agle
+🙏🙏🙏
+Really grateful for the 🥈 place
+
+Also, the best Advanced Analysis
+
+{Reactions}
+🔥 (8) hi5 (3) 
+
+[08/18/2023 15:59] 0xrizwan
+Congrats Everyone 🎉 🎉 
+
+My first Top 5
+
+{Reactions}
+🎉 (3) 
+
+[08/18/2023 16:01] dirk_y
+Haha yeah and I almost decided not to do this one 🤯  Well done everyone!!
+
+{Reactions}
+🔥 (4) 
+
+[08/18/2023 16:06] dirk_y
+Btw massive kudos to @RaymondFam and @hickuphh3 for the rapid work on getting the results out for this contest, crazy fast!! 🏆 🫡
+
+{Reactions}
+💯 (7) 🫡 (2) 
+
+[08/18/2023 16:10] angry_mustache_man
+My first four figure reward 🥳🥳🥳
+
+{Reactions}
+🎉 (7) 
+
+[08/18/2023 17:24] eme0242
+@dirk_y firing everywhere🔥
+
+{Reactions}
+❤️ 
+
+[08/18/2023 18:58] 0xsorrynotsorry
+I think this is C4's fastest so far.
+
+{Reactions}
+🚀 (5) poolyfast (2) poolyfast party_skeletor 
+
+[08/18/2023 23:05] tamayonft
+Can I tweet about a vulnerability or I got wait until the report will be out?
+
+
+[08/18/2023 23:37] cloudellie
+You can discuss the awarding results but no discussion of the vulns themselves until the report is out. Report going public is the best signal that the project team has mitigated all findings.
+
+
+[08/19/2023 00:37] tamayonft
+Thanks
+
+
+[08/19/2023 10:19] tjaaark
+omg hire @dirk_y
+
+
+[08/19/2023 10:20] tjaaark
+will he complete the triple?
+
+{Reactions}
+😂 (2) 
+
+[08/21/2023 09:51] tjaaark
+
+
+{Attachments}
+Code4rena - ARCHIVE-Q3-2023 - pooltogether-aug02 [1136026908723777627].txt_Files/image-89054.png
+
+{Reactions}
+👀 
+
+[08/21/2023 09:51] tjaaark
+https://tenor.com/view/izctrl-popcorn-gif-21698700
+
+{Embed}
+https://tenor.com/view/izctrl-popcorn-gif-21698700
+Code4rena - ARCHIVE-Q3-2023 - pooltogether-aug02 [1136026908723777627].txt_Files/izctrl-popcorn-6EEDE.png
+
+
+[08/21/2023 09:51] tjaaark
+this will be good
+
+
+[08/21/2023 14:00] plamkata
+Has anyone rceived their payout yet??
+
+
+[08/21/2023 14:29] zhaojie
+https://discord.com/channels/810916927919620096/810929015509483554/1142961662442348604
+
+
+[09/14/2023 17:17] lonser
+Report is out!
+<https://code4rena.com/reports/2023-08-pooltogether>
+
+
+[09/28/2023 17:41] trachev
+Have rewards been sent?
+
+
+[09/28/2023 19:17] 0xstalin
+Long time ago
+
+
+[10/20/2023 15:56] kelvineth
+Stop sending this
+
+
+==============================================================
+Exported 135 message(s)
+==============================================================
